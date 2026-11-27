@@ -29,12 +29,14 @@ pipeline {
         }
 
         stage('Tests') {
-            steps {
+           steps {
+              withEnv(['DB_PASSWORD=YOUR_PASSWORD']) {
                 dir('backend') {
-                    sh './mvnw test'
-                }
-            }
-        }
+                   sh './mvnw test'
+                  }
+              }
+           }
+       }
 
         stage('SonarQube Analysis') {
             steps {
